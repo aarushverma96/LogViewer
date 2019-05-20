@@ -1,24 +1,29 @@
-# README
+# LogViewer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application to view your development and production logs in the browser
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+* Clone the repository 
 
-* System dependencies
+```bash
+git clone https://github.com/aarushverma96/LogViewer.git
+```
+* Use bundler to install the gems required
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+bundle install
+```
+* Start background workers for resque 
+```bash
+PIDFILE=./resque.pid BACKGROUND=yes QUEUE="*" COUNT=4 RAILS_ENV=development rake resque:work >> resque.log
+```
+* Start redis server
+```bash
+redis-server
+```
+* Start rails server
+```bash
+rails server
+```
+* Visit [**http://localhost:3000/logs/development**](http://localhost:3000/logs/development)
